@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const base = "http://localhost:3001/";
+
+      function get() {
+        fetch(base, {})
+          .then((res) => res.json())
+          .then((res) => console.log(res))
+          .catch((err) => {
+            console.log("err");
+          });
+      }
+      function createUser(name) {
+        console.log("開始打API送資料");
+
+        // if (name) {
+        let body = { name: name };
+        const headers = { "Content-Type": "application/json; charset=utf-8" }
+        fetch(base + "create", {
+          headers: headers,
+          method: "POST",
+          body: JSON.stringify(body),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              // get error message from body or default to response status
+              const error = (data && data.message) || response.status;
+              return Promise.reject(error);
+            }
+            return response.json();
+          })
+          .then((json) => console.log(json))
+          .then(() => console.log("完成"))
+          .catch((err) => {
+            console.log("出現error");
+          });
+
+        // }
+      }
+      //   示範正確GET
+        // get();
+      // 示範正確POST
+        createUser("JACK");
+      //示範錯誤
+    //   createUser();
+    </script>
+  </body>
+</html>

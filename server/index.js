@@ -1,11 +1,29 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
+// const mysql = require("mysql");
+// const bodyParser = require("body-parser");
 const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200);
+  res.send({ msg: "get success" });
+});
+
+app.post("/create", (req, res) => {
+  let body = req.body;
+  console.log('伺服器收到:',body);
+  if (body.name) {
+    res.status(201);
+    res.send({ name: body.name, id: 1 });
+  } else {
+    res.status(400);
+    res.send({ msg: "name required !" });
+  }
+});
+/** 
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
@@ -69,7 +87,15 @@ app.delete("/delete/:id", (req, res) => {
     }
   });
 });
-
+*/
 app.listen(3001, () => {
   console.log("Yey, your server is running on port 3001");
 });
+
+
+/**總結痛苦的點
+ * 1. express框架套件語法不熟 沒看過文件
+ * 2. fetch 格式不熟 headers和body格式不懂...以前是用axios套件
+ * 3. 前後端混合不熟，容易網錯誤方向去找問題 
+ * 4. 線上機器bug很難處理
+ * */
