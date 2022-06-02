@@ -6,7 +6,7 @@
   </head>
   <body>
     <script>
-      const base = "http://localhost:3001/";
+      const base = "http://localhost:3011/";
 
       function get() {
         fetch(base, {})
@@ -21,7 +21,7 @@
 
         // if (name) {
         let body = { name: name };
-        const headers = { "Content-Type": "application/json; charset=utf-8" }
+        const headers = { "Content-Type": "application/json; charset=utf-8" };
         fetch(base + "create", {
           headers: headers,
           method: "POST",
@@ -40,15 +40,14 @@
           .catch((err) => {
             console.log("出現error");
           });
-
-        // }
       }
+      
       //   示範正確GET
-        // get();
+      // get();
       // 示範正確POST
-        createUser("JACK");
+      // createUser("JACK");
       //示範錯誤
-    //   createUser();
+      //   createUser();
     </script>
   </body>
 </html>

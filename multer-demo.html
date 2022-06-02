@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MY APP</title>
+  </head>
+  <body>
+    <h1>SINGLE FILE</h1>
+    <!--  SINGLE FILE -->
+    <form
+      action="http://localhost:3011/file"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      <input type="file" name="myFile" id="myFirstUpload" />
+      <input type="submit" value="Upload a file" />
+    </form>
+
+    <h1>MULTIPLE FILE</h1>
+    <!-- MULTIPLE FILES -->
+
+    <form action="/uploadmultiple" enctype="multipart/form-data" method="POST">
+      Select images: <input type="file" name="myFiles" multiple />
+      <input type="submit" value="Upload your files" />
+    </form>
+
+    <!--   PHOTO-->
+    <h1>PHOTO</h1>
+    <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
+      <input type="file" name="myImage" accept="image/*" />
+      <input type="submit" value="Upload Photo" />
+    </form>
+
+    <script>
+      document
+        .querySelector("#myFirstUpload")
+        .addEventListener("change", (event) => {
+          handleImageUpload(event);
+        });
+
+      function handleImageUpload(event) {
+        const files = event.target.files;
+        const formData = new FormData();
+        formData.append("myFile", files[0]);
+        // headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        fetch("http://localhost:3011/file", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
+</html>
