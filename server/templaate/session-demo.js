@@ -32,6 +32,11 @@ app.get("/get", (req, res) => {
   res.send(responseTxt);
 });
 
+app.get("/", (req, res) => {
+  let responseTxt = "no";
+  res.send(responseTxt);
+});
+
 app.listen(3011, () => {
   console.log("http://localhost:3011/set", "http://localhost:3011/get");
 });
